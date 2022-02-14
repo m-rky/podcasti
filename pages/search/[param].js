@@ -61,7 +61,7 @@ export default SearchPage;
 export async function getServerSideProps(context) {
   const query = context.query.param;
   const res = await search(context.query.param);
-  const { feeds, count } = await res;
+  const { feeds, count } = await res.json();
 
   if (feeds && count) {
     return {
