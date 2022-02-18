@@ -28,12 +28,6 @@ const Layout = ({ children, playing }) => {
           href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Nunito:wght@400;600&display=swap"
           rel="stylesheet"
         ></link>
-        <script
-          async
-          defer
-          data-website-id="2a9039bb-3551-40c2-bff6-d5193c6e04cd"
-          src="https://umame.one/umami.js"
-        ></script>
       </Head>
       <StyledHeader>
         <Link href="/" passHref>
