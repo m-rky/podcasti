@@ -1,7 +1,6 @@
 import Search from "@comp/Search";
 import tw, { styled } from "twin.macro";
 import { useEffect, useState } from "react";
-import Grid from "@comp/Grid";
 import SimpleCard from "@comp/SimpleCard";
 
 const Index = () => {
@@ -20,7 +19,7 @@ const Index = () => {
     <HomePage>
       <HomeTitle>Find your next pod!</HomeTitle>
       <Search />
-      <Grid>
+      <Flex>
         {listOfPods.map((podcast) => (
           <SimpleCard
             key={podcast.id}
@@ -29,7 +28,7 @@ const Index = () => {
             image={podcast.image[0][1].url}
           />
         ))}
-      </Grid>
+      </Flex>
     </HomePage>
   );
 };
@@ -37,10 +36,14 @@ const Index = () => {
 export default Index;
 
 const HomePage = styled.section`
-  height: calc(100vh - 10rem);
-  > * {
-    ${tw`mx-4`}
+  > form {
+    ${tw`mb-6`}
   }
-  ${tw`flex flex-col justify-center flex-1 w-11/12 mt-24 ml-auto mr-auto`}
+  ${tw`overflow-y-scroll overflow-x-hidden flex flex-col justify-center flex-1 w-11/12 mt-36 ml-auto mr-auto`}
 `;
 const HomeTitle = tw.h2`text-3xl font-bold mb-5`;
+const Flex = styled.div`
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  ${tw`flex flex-wrap justify-between pb-8`}
+`;

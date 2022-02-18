@@ -16,9 +16,9 @@ module.exports = {
       },
       fontFamily: {
         accent: "'DM Serif Text', serif",
-        body: "'Nunito', sans-serif"
-      }
-    }
+        body: "'Nunito', sans-serif",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

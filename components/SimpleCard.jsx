@@ -24,18 +24,21 @@ const SimpleCard = ({ id, title, image }) => {
 export default SimpleCard;
 
 const StyledCard = styled.article`
-  ${tw`flex items-center`}
-  @media (max-width: 250px) {
-    ${tw`flex-col`}
-  }
+  ${tw`bg-[#FDE0D3] w-40 my-2 mx-2 flex flex-col flex-grow items-center border-2 border-transparent transition duration-150 ease-in-out rounded-lg shadow hover:shadow-md active:(border-2 border-black opacity-95 shadow-inner transform scale-95)`}
 `;
-const CardInfo = tw.div`flex-1 pl-1 text-xs sm:(text-base py-2 px-2)`;
+const CardInfo = tw.div`flex-1 flex items-center pl-1 text-xs text-center sm:(text-base py-2 px-2)`;
 const CardInfoHeader = tw.h2`font-bold pb-2`;
 const CardImageBox = styled.div`
   & img {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     ${tw`rounded`}
   }
-  ${tw`relative block h-16 w-16 sm:(h-36 w-36)`}
+  ${tw`relative block p-4`}
   @media (max-width: 250px) {
     display: none;
   }
