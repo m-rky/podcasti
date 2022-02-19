@@ -28,7 +28,7 @@ const customStyles = css`
     font-family: ${theme`fontFamily.accent`};
   }
   a {
-    ${tw`outline-none focus:(ring ring-main ring-inset) hover:(text-highlight)`};
+    ${tw`focus:(outline-none ring ring-accent ring-inset) hover:(text-highlight)`};
   }
 `;
 

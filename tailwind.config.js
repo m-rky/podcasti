@@ -13,6 +13,7 @@ module.exports = {
         bg: "#FEF1EB",
         bgDarker: "#FDD5C3",
         highlight: "#ED474A",
+        accent: "rgb(255 133 76)",
       },
       fontFamily: {
         accent: "'DM Serif Text', serif",

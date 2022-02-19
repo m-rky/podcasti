@@ -1,4 +1,4 @@
-import tw, {styled, theme} from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 import NavLinks from "@core/NavLinks";
 import Burger from "@core/Burger";
 import { useState, useEffect } from "react";
@@ -57,4 +57,6 @@ const Nav = ({ person }) => {
 
 export default Nav;
 
-const MobileButton = styled.button`${tw`right-0 p-4 top-0 z-40 h-14 w-14 outline-none focus:(ring ring-main)`}`;
+const MobileButton = styled.button`
+  ${tw`right-0 p-4 top-0 z-40 h-14 w-14 focus:(rounded outline-none ring ring-accent ring-inset)`}
+`;

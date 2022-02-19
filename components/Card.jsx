@@ -105,7 +105,7 @@ const CardImageBox = styled.div`
 const CardImage = tw(Image)``;
 const CardActions = styled.div`
   button {
-    ${tw`pl-2 my-2 ml-2`}
+    ${tw`pl-2 my-2 ml-2 focus:(rounded outline-none ring ring-accent)`}
   }
   button:first-of-type {
     ${tw`sm:(border-2 border-transparent pr-2)`}

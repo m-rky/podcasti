@@ -57,8 +57,9 @@ const StyledHeader = styled.header`
   > button,
   > a {
     margin: 1rem;
+    ${tw`rounded`}
   }
   color: ${theme`colors.main`};
   ${tw`fixed top-0 left-0 right-0 z-10 flex items-center justify-between h-24 ml-auto mr-auto backdrop-filter backdrop-blur-xl`}
 `;
-const Title = tw.h1`text-xl font-bold sm:(text-3xl) lg:(text-4xl font-black)`;
+const Title = tw.h1`text-xl font-bold py-4 sm:(text-3xl) lg:(text-4xl font-black)`;
