@@ -43,7 +43,5 @@ const HomePage = styled.section`
 `;
 const HomeTitle = tw.h2`text-3xl font-bold mb-5`;
 const Flex = styled.div`
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
-  ${tw`flex flex-wrap justify-between pb-8`}
+  ${tw`flex flex-wrap justify-between pb-8 gap-4`}
 `;

@@ -1,10 +1,10 @@
 import { getTopTracks } from "../../lib/spotify";
 
-export default async (_, res) => {
+export default async function handler(_, res) {
   const response = await getTopTracks();
   const { shows } = await response.json();
 
-  const tracks = shows.slice(0, 10).map((track) => ({
+  const tracks = shows.map((track) => ({
     id: track.id,
     publisher: track.publisher,
     songUrl: track.external_urls.spotify,
@@ -13,4 +13,4 @@ export default async (_, res) => {
   }));
 
   return res.status(200).json({ tracks });
-};
+}
