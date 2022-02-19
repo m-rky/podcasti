@@ -30,47 +30,30 @@ const Card = ({ info, playing, details, index, children, author }) => {
     title,
   } = info;
 
-  const cloudUrl = buildUrl(image || feedImage, {
-    cloud: {
-      cloudName: "daiihufwr",
-      storageType: "fetch",
-    },
-    transformations: {
-      resize: {
-        width: 300,
-      },
-    },
-  });
-
-  // TODO: Fix page change = resetting the times because the calculations aren't set
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const convertedDate = datePublished * 1000;
-  const timeDate = new Date(convertedDate).toISOString();
-  const formattedDate = new Date(convertedDate).toLocaleDateString(
-    undefined,
-    options
-  );
-  const hours = Math.floor(duration / 60 / 60);
-  const minutes = Math.round(duration / 60) - hours * 60;
+  // const cloudUrl = buildUrl(image || feedImage, {
+  //   cloud: {
+  //     cloudName: "daiihufwr",
+  //     storageType: "fetch",
+  //   },
+  //   transformations: {
+  //     resize: {
+  //       width: 300,
+  //     },
+  //   },
+  // });
 
   return (
     <StyledCard>
       <CardImageBox>
-        <CardImage
+        {/* <CardImage
           src={cloudUrl}
           alt={`Cover image for the show '${title}'`}
           layout="fill"
           quality={100}
-        ></CardImage>
+        ></CardImage> */}
       </CardImageBox>
       <CardInfo>
         <CardInfoHeader>{title}</CardInfoHeader>
-        {/* Edit this so that if it's within the past week, show "x days ago.../today" */}
-        <time dateTime={timeDate}>{formattedDate}</time>
       </CardInfo>
 
       <CardActions>
@@ -80,7 +63,7 @@ const Card = ({ info, playing, details, index, children, author }) => {
             playing({
               playing: enclosureUrl,
               name: title,
-              img: cloudUrl,
+              img: "huh",
               author: author,
             })
           }

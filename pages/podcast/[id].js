@@ -2,207 +2,165 @@ import { useRef, useState, useEffect } from "react";
 import { supabase } from "@lib/initSupabase";
 import List from "@comp/List";
 import Card from "@comp/Card";
-import { getEpisodes, getTitle } from "@lib/PodcastIndex";
+// import { getEpisodes, getTitle } from "@lib/PodcastIndex";
 import { Modal } from "@core/Modal";
 import ReactPaginate from "react-paginate";
 import tw, { styled } from "twin.macro";
-import { buildUrl } from "cloudinary-build-url";
 import Image from "next/image";
 import Link from "next/link";
+import { getPodcastEpisodes } from "@lib/spotify";
 
-const PodcastPage = (props) => {
-  const [content, setContent] = useState(props.items || null);
+const PodcastPage = ({ items, name, playing }) => {
+  console.log(items[0]);
+  console.log(name);
+  // const [content, setContent] = useState(props.items || null);
   const [modal, setModal] = useState({ open: false, id: null });
-  const [subbed, setSubbed] = useState([]);
-  const [added, setAdded] = useState(false);
-  const [size, setSize] = useState(10);
-  const [activeContent, setActiveContent] = useState(content.slice(0, size));
-  const ref = useRef();
+  // const [subbed, setSubbed] = useState([]);
+  // const [added, setAdded] = useState(false);
+  // const [size, setSize] = useState(10);
+  // const [activeContent, setActiveContent] = useState(content.slice(0, size));
+  // const ref = useRef();
 
-  const user = supabase.auth.user();
+  // const user = supabase.auth.user();
 
-  useEffect(() => {
-    // TODO: filter by user ID, right now it's just getting the first no matter what
-    (async () => {
-      setSubbed([]);
-      if (user) {
-        const { data, error } = await supabase
-          .from("subs")
-          .select("showlist")
-          .match({ user: user.id });
-        if (data.length >= 1) {
-          const { showlist } = data[0];
-          setSubbed(showlist.map((item) => item.id));
-        }
-      }
-    })();
+  // useEffect(() => {
+  //   // TODO: filter by user ID, right now it's just getting the first no matter what
+  //   (async () => {
+  //     setSubbed([]);
+  //     if (user) {
+  //       const { data, error } = await supabase
+  //         .from("subs")
+  //         .select("showlist")
+  //         .match({ user: user.id });
+  //       if (data.length >= 1) {
+  //         const { showlist } = data[0];
+  //         setSubbed(showlist.map((item) => item.id));
+  //       }
+  //     }
+  //   })();
 
-    setActiveContent(content.slice(0, size));
+  //   setActiveContent(content.slice(0, size));
 
-    ref.current = document.querySelector("html");
-    ref.current.addEventListener("keydown", keyPressed);
-  }, []);
+  //   ref.current = document.querySelector("html");
+  //   ref.current.addEventListener("keydown", keyPressed);
+  // }, []);
 
-  useEffect(() => {
-    // TODO: Added is being set to true no matter what even when signed out...
-    setAdded(subbed.includes(content[0].feedId));
-  }, [subbed]);
+  // useEffect(() => {
+  //   // TODO: Added is being set to true no matter what even when signed out...
+  //   setAdded(subbed.includes(content[0].feedId));
+  // }, [subbed]);
 
-  const keyPressed = (e) => {
-    if (e.key === "Escape") {
-      setModal({ open: false, id: null });
-    }
-  };
+  // const keyPressed = (e) => {
+  //   if (e.key === "Escape") {
+  //     setModal({ open: false, id: null });
+  //   }
+  // };
 
-  const cloudUrl = buildUrl(content[0].feedImage || content[0].image, {
-    cloud: {
-      cloudName: "daiihufwr",
-      storageType: "fetch",
-    },
-    transformations: {
-      resize: {
-        width: 300,
-      },
-    },
-  });
+  // const handleSub = async () => {
+  //   const { id } = await supabase.auth.user();
+  //   const { data: orig, error: problem } = await supabase
+  //     .from("subs")
+  //     .select("showlist")
+  //     .match({ user: user.id });
 
-  const handleSub = async () => {
-    const { id } = await supabase.auth.user();
-    const { data: orig, error: problem } = await supabase
-      .from("subs")
-      .select("showlist")
-      .match({ user: user.id });
+  //   if (orig.length >= 1) {
+  //     const { showlist } = orig[0];
+  //     const found = showlist.find((item) => item.id === content[0].feedId);
+  //     if (showlist.length >= 1 && showlist !== null && found === undefined) {
+  //       // if there are already saved subs
+  //       const addedPod = {
+  //         id: content[0].feedId,
+  //         name: props.title,
+  //         author: props.author,
+  //         image: content[0].image || content[0].feedImage,
+  //         genres: props.categories,
+  //       };
+  //       const newArr = orig[0].showlist.map((item) => item);
+  //       newArr.push(addedPod);
+  //       const { data, error } = await supabase.from("subs").upsert({
+  //         id: id,
+  //         user: id,
+  //         genres: Object.values(props.categories),
+  //         showlist: newArr,
+  //       });
+  //       setAdded(true);
+  //     } else if (showlist === null) {
+  //       // if there are no saved subs
+  //       const { data, error } = await supabase.from("subs").upsert({
+  //         id: id,
+  //         user: id,
+  //         genres: Object.values(props.categories),
+  //         showlist: [
+  //           {
+  //             id: content[0].feedId,
+  //             name: props.title,
+  //             author: props.author,
+  //             image: content[0].image || content[0].feedImage,
+  //             genres: props.categories,
+  //           },
+  //         ],
+  //       });
+  //       setAdded(true);
+  //     } else {
+  //       // removing the sub
+  //       const filteredArray = showlist.filter((item) => item !== found);
+  //       const { data, error } = await supabase.from("subs").upsert({
+  //         id: id,
+  //         user: id,
+  //         genres: Object.values(props.categories),
+  //         showlist: filteredArray,
+  //       });
+  //       setAdded(false);
+  //     }
+  //   }
 
-    if (orig.length >= 1) {
-      const { showlist } = orig[0];
-      const found = showlist.find((item) => item.id === content[0].feedId);
-      if (showlist.length >= 1 && showlist !== null && found === undefined) {
-        // if there are already saved subs
-        const addedPod = {
-          id: content[0].feedId,
-          name: props.title,
-          author: props.author,
-          image: content[0].image || content[0].feedImage,
-          genres: props.categories,
-        };
-        const newArr = orig[0].showlist.map((item) => item);
-        newArr.push(addedPod);
-        const { data, error } = await supabase.from("subs").upsert({
-          id: id,
-          user: id,
-          genres: Object.values(props.categories),
-          showlist: newArr,
-        });
-        setAdded(true);
-      } else if (showlist === null) {
-        // if there are no saved subs
-        const { data, error } = await supabase.from("subs").upsert({
-          id: id,
-          user: id,
-          genres: Object.values(props.categories),
-          showlist: [
-            {
-              id: content[0].feedId,
-              name: props.title,
-              author: props.author,
-              image: content[0].image || content[0].feedImage,
-              genres: props.categories,
-            },
-          ],
-        });
-        setAdded(true);
-      } else {
-        // removing the sub
-        const filteredArray = showlist.filter((item) => item !== found);
-        const { data, error } = await supabase.from("subs").upsert({
-          id: id,
-          user: id,
-          genres: Object.values(props.categories),
-          showlist: filteredArray,
-        });
-        setAdded(false);
-      }
-    }
+  //   if (orig.length < 1 || orig[0].showlist.length < 1) {
+  //     const { data, error } = await supabase.from("subs").upsert({
+  //       id: id,
+  //       user: id,
+  //       genres: Object.values(props.categories),
+  //       showlist: [
+  //         {
+  //           id: content[0].feedId,
+  //           name: props.title,
+  //           author: props.author,
+  //           image: content[0].image || content[0].feedImage,
+  //           genres: props.categories,
+  //         },
+  //       ],
+  //     });
+  //     setAdded(true);
+  //   }
+  // };
 
-    if (orig.length < 1 || orig[0].showlist.length < 1) {
-      const { data, error } = await supabase.from("subs").upsert({
-        id: id,
-        user: id,
-        genres: Object.values(props.categories),
-        showlist: [
-          {
-            id: content[0].feedId,
-            name: props.title,
-            author: props.author,
-            image: content[0].image || content[0].feedImage,
-            genres: props.categories,
-          },
-        ],
-      });
-      setAdded(true);
-    }
-  };
+  // const handlePageClick = (data) => {
+  //   let offset = size * data.selected;
+  //   if (data.selected === 0) {
+  //     setActiveContent(content.slice(0, size));
+  //   }
+  //   setActiveContent(content.slice(offset, offset + size));
+  // };
 
-  const handlePageClick = (data) => {
-    let offset = size * data.selected;
-    if (data.selected === 0) {
-      setActiveContent(content.slice(0, size));
-    }
-    setActiveContent(content.slice(offset, offset + size));
-  };
-
-  return (
-    <StyledPodPage>
-      <Info>
-        <StyledHeader>{props.title}</StyledHeader>
-        <StyledImageWrapper>
-          <Image
+  if (name && items) {
+    return (
+      <StyledPodPage>
+        <Info>
+          <StyledHeader>{name}</StyledHeader>
+          <StyledImageWrapper>
+            {/* <img
             src={cloudUrl}
             alt={`Cover image for the podcast '${props.title}'`}
             layout="fill"
             quality={100}
-          />
-        </StyledImageWrapper>
-
-        <InfoText>
-          {props.title !== props.author && (
-            <AuthorText>{props.author}</AuthorText>
-          )}
-          <Genres>
-            {Object.keys(props.categories).length > 1 &&
-              Object.keys(props.categories)
-                .slice(0, 3)
-                .map((category, index) => (
-                  <GenreItem key={index}>
-                    {props.categories[category]}
-                  </GenreItem>
-                ))}
-            {Object.keys(props.categories).length <= 1 && (
-              <GenreItem>{Object.values(props.categories)}</GenreItem>
-            )}
-          </Genres>
-          {user === null && (
-            <Link href="/auth" passHref>
-              <StyledSignIn>Sign In</StyledSignIn>
-            </Link>
-          )}
-          <StyledSubButton
-            onClick={() => handleSub()}
-            added={added}
-            disabled={user === null}
-          >
-            {added ? "Unsubscribe" : "Subscribe"}
-          </StyledSubButton>
-        </InfoText>
-      </Info>
-
-      {content && (
+          /> */}
+          </StyledImageWrapper>
+        </Info>
         <List>
-          {activeContent.map((item, index) => (
+          {items.map((item, index) => (
             <Card
               key={item.id}
               info={item}
-              playing={props.playing}
+              playing={playing}
               details={setModal}
               index={index}
             >
@@ -216,46 +174,110 @@ const PodcastPage = (props) => {
             </Card>
           ))}
         </List>
-      )}
-      <StyledPaginate>
-        <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={content.length / size}
-          marginPagesDisplayed={0}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          previousClassName={"prev"}
-          disabledClassName={"disabled"}
-        />
-      </StyledPaginate>
-    </StyledPodPage>
+      </StyledPodPage>
+    );
+  }
+
+  return (
+    <h1>Hi</h1>
+    // <StyledPodPage>
+    // <Info>
+    //   <StyledHeader>{props.title}</StyledHeader>
+    //   <StyledImageWrapper>
+    //     <Image
+    //       src={cloudUrl}
+    //       alt={`Cover image for the podcast '${props.title}'`}
+    //       layout="fill"
+    //       quality={100}
+    //     />
+    //   </StyledImageWrapper>
+
+    //   <InfoText>
+    //     {props.title !== props.author && (
+    //       <AuthorText>{props.author}</AuthorText>
+    //     )}
+    //     <Genres>
+    //       {Object.keys(props.categories).length > 1 &&
+    //         Object.keys(props.categories)
+    //           .slice(0, 3)
+    //           .map((category, index) => (
+    //             <GenreItem key={index}>
+    //               {props.categories[category]}
+    //             </GenreItem>
+    //           ))}
+    //       {Object.keys(props.categories).length <= 1 && (
+    //         <GenreItem>{Object.values(props.categories)}</GenreItem>
+    //       )}
+    //     </Genres>
+    //     {user === null && (
+    //       <Link href="/auth" passHref>
+    //         <StyledSignIn>Sign In</StyledSignIn>
+    //       </Link>
+    //     )}
+    //     <StyledSubButton
+    //       onClick={() => handleSub()}
+    //       added={added}
+    //       disabled={user === null}
+    //     >
+    //       {added ? "Unsubscribe" : "Subscribe"}
+    //     </StyledSubButton>
+    //   </InfoText>
+    // </Info>
+
+    //   {content && (
+    // <List>
+    //   {activeContent.map((item, index) => (
+    //     <Card
+    //       key={item.id}
+    //       info={item}
+    //       playing={props.playing}
+    //       details={setModal}
+    //       index={index}
+    //     >
+    //       <Modal
+    //         key={"modal-" + index}
+    //         open={modal.id === index}
+    //         content={item.description}
+    //         selector="#portal"
+    //         onClick={() => setModal({ open: false, id: null })}
+    //       ></Modal>
+    //     </Card>
+    //   ))}
+    // </List>
+    //   )}
+    //   <StyledPaginate>
+    //     <ReactPaginate
+    //       previousLabel={"previous"}
+    //       nextLabel={"next"}
+    //       breakLabel={"..."}
+    //       breakClassName={"break-me"}
+    //       pageCount={content.length / size}
+    //       marginPagesDisplayed={0}
+    //       pageRangeDisplayed={3}
+    //       onPageChange={handlePageClick}
+    //       containerClassName={"pagination"}
+    //       activeClassName={"active"}
+    //       previousClassName={"prev"}
+    //       disabledClassName={"disabled"}
+    //     />
+    //   </StyledPaginate>
+    // </StyledPodPage>
   );
 };
 
 export default PodcastPage;
 
 export async function getServerSideProps(context) {
-  const { id } = context.query;
+  const { id, name } = context.query;
+  const response = await getPodcastEpisodes(id);
+  const data = await response.json();
+  const { items } = data;
 
-  const {
-    feed: { title, categories, author },
-  } = await getTitle(id);
-
-  const res = await getEpisodes(id);
-  const { count, items } = res;
-
-  if (count >= 1 && title && categories && author) {
-    return { props: { items, count, title, categories, author } };
-  }
-  return {
-    redirect: { permanent: false, destination: "/404" },
-    props: {},
-  };
+  return { props: { items, name } };
+  // return {
+  //   redirect: { permanent: false, destination: "/404" },
+  //   props: {},
+  // };
 }
 
 const StyledPodPage = styled.section`
