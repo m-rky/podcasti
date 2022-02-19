@@ -1,5 +1,3 @@
-import { search } from "@lib/PodcastIndex";
-import Result from "@comp/Result";
 import Search from "@comp/Search";
 import Grid from "@comp/Grid";
 import tw, { styled } from "twin.macro";
@@ -10,17 +8,17 @@ const SearchPage = ({ feeds, count, query }) => {
       <StyledSearchPage>
         <Search />
         <StyledHeader>Results:</StyledHeader>
-        <Grid>
+        {/* <Grid>
           {feeds.map((feed) => (
-            <Result
-              key={feed.id}
-              name={feed.title}
-              image={feed.artwork || feed.image}
-              id={feed.id}
-              host={feed.author}
-            />
+            // <Result
+            //   key={feed.id}
+            //   name={feed.title}
+            //   image={feed.artwork || feed.image}
+            //   id={feed.id}
+            //   host={feed.author}
+            // />
           ))}
-        </Grid>
+        </Grid> */}
       </StyledSearchPage>
     );
   } else if (feeds && feeds.length <= 1) {
@@ -28,7 +26,7 @@ const SearchPage = ({ feeds, count, query }) => {
       <StyledSearchPage>
         <Search />
         <StyledHeader>Results:</StyledHeader>
-        <Grid>
+        {/* <Grid>
           <Result
             key={feeds[0].id}
             name={feeds[0].title}
@@ -36,7 +34,7 @@ const SearchPage = ({ feeds, count, query }) => {
             id={feeds[0].id}
             host={feeds[0].author}
           />
-        </Grid>
+        </Grid> */}
       </StyledSearchPage>
     );
   }

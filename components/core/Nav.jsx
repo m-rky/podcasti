@@ -1,4 +1,4 @@
-import tw, { styled, theme } from "twin.macro";
+import tw, { styled } from "twin.macro";
 import NavLinks from "@core/NavLinks";
 import Burger from "@core/Burger";
 import { useState, useEffect } from "react";
@@ -49,7 +49,7 @@ const Nav = ({ person }) => {
   return (
     <>
       <MobileMenu open={open} setOpen={setOpen} />
-      <Burger open={open} setOpen={setOpen} person={person} />
+      <Burger open={open} setOpen={setOpen} />
       {!mobile && <NavLinks />}
     </>
   );

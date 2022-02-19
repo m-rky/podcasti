@@ -1,11 +1,10 @@
 import Nav from "@core/Nav";
-import Player from "@core/Player";
 import tw, { styled, theme } from "twin.macro";
 import Link from "next/link";
 import Head from "next/head";
 import common from "../../locales/en/common";
 
-const Layout = ({ children, playing }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Head>
@@ -39,14 +38,6 @@ const Layout = ({ children, playing }) => {
       </StyledHeader>
 
       {children}
-      {playing.playing.length >= 1 ? (
-        <Player
-          playing={playing.playing}
-          name={playing.name}
-          img={playing.img}
-          author={playing.author}
-        />
-      ) : null}
     </>
   );
 };
