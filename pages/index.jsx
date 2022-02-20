@@ -39,7 +39,7 @@ const HomePage = styled.section`
   > form {
     ${tw`mb-6`}
   }
-  ${tw`overflow-y-scroll overflow-x-hidden flex flex-col justify-center flex-1 w-11/12 mt-36 ml-auto mr-auto`}
+  ${tw`overflow-y-scroll overflow-x-hidden flex flex-col justify-center flex-1 px-8 mt-36 ml-auto mr-auto`}
 `;
 const HomeTitle = tw.h2`text-3xl font-bold mb-5`;
 const Flex = styled.div`
