@@ -1,48 +1,24 @@
 import Search from "@comp/Search";
-import Grid from "@comp/Grid";
+import SimpleCard from "@comp/SimpleCard";
+import { searchForPodcasts } from "@lib/spotify";
 import tw, { styled } from "twin.macro";
 
-const SearchPage = ({ feeds, count, query }) => {
-  if (feeds && feeds.length > 1) {
+const SearchPage = ({ items, count }) => {
+  if (items && count > 1) {
     return (
       <StyledSearchPage>
         <Search />
-        <StyledHeader>Results:</StyledHeader>
-        {/* <Grid>
-          {feeds.map((feed) => (
-            // <Result
-            //   key={feed.id}
-            //   name={feed.title}
-            //   image={feed.artwork || feed.image}
-            //   id={feed.id}
-            //   host={feed.author}
-            // />
+        <span>{count}</span>
+        <Flex>
+          {items.map((show) => (
+            <SimpleCard
+              key={show.id}
+              id={show.id}
+              title={show.name}
+              image={show.images[1].url}
+            />
           ))}
-        </Grid> */}
-      </StyledSearchPage>
-    );
-  } else if (feeds && feeds.length <= 1) {
-    return (
-      <StyledSearchPage>
-        <Search />
-        <StyledHeader>Results:</StyledHeader>
-        {/* <Grid>
-          <Result
-            key={feeds[0].id}
-            name={feeds[0].title}
-            image={feeds[0].artwork || feeds[0].image}
-            id={feeds[0].id}
-            host={feeds[0].author}
-          />
-        </Grid> */}
-      </StyledSearchPage>
-    );
-  }
-
-  if (count === 0) {
-    return (
-      <StyledSearchPage>
-        <StyledHeader>No results found for '{query}'</StyledHeader>
+        </Flex>
       </StyledSearchPage>
     );
   }
@@ -50,6 +26,7 @@ const SearchPage = ({ feeds, count, query }) => {
   return (
     <StyledSearchPage>
       <StyledHeader>Loading...</StyledHeader>
+      <span>{count}</span>
     </StyledSearchPage>
   );
 };
@@ -58,17 +35,16 @@ export default SearchPage;
 
 export async function getServerSideProps(context) {
   const query = context.query.param;
-  const res = await search(context.query.param);
-  const { feeds, count } = await res.json();
+  const response = await searchForPodcasts(query);
+  const data = await response.json();
 
-  if (feeds && count) {
+  if (data) {
     return {
-      props: { feeds, count, query },
+      props: { items: data.shows.items, count: data.shows.total },
     };
   }
-
   return {
-    props: { count, query },
+    props: {},
   };
 }
 
@@ -80,3 +56,6 @@ const StyledSearchPage = styled.section`
   ${tw`w-11/12 mt-24 ml-auto mr-auto`}
 `;
 const StyledHeader = tw.h3`text-xl font-bold`;
+const Flex = styled.div`
+  ${tw`flex flex-wrap justify-between pb-8 gap-4`}
+`;

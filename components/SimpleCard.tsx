@@ -1,5 +1,6 @@
 import React from "react";
 import tw, { styled, theme } from "twin.macro";
+import Link from "next/link";
 
 type CardProps = {
   id: string;
@@ -9,18 +10,26 @@ type CardProps = {
 
 const SimpleCard = ({ id, title, image }: CardProps): JSX.Element => {
   return (
-    <StyledCard href={`/podcast/${id}?name=${title}`} draggable="false">
-      <CardImageBox>
-        <CardImage
-          src={image}
-          alt={`Cover image for the show '${title}'`}
-          draggable="false"
-        ></CardImage>
-      </CardImageBox>
-      <CardInfo>
-        <CardInfoHeader>{title}</CardInfoHeader>
-      </CardInfo>
-    </StyledCard>
+    <Link
+      href={{
+        pathname: `/podcast/[id]`,
+        query: { id: id, name: title },
+      }}
+      passHref
+    >
+      <StyledCard draggable={false}>
+        <CardImageBox>
+          <CardImage
+            src={image}
+            alt={`Cover image for the show '${title}'`}
+            draggable={false}
+          ></CardImage>
+        </CardImageBox>
+        <CardInfo>
+          <CardInfoHeader>{title}</CardInfoHeader>
+        </CardInfo>
+      </StyledCard>
+    </Link>
   );
 };
 

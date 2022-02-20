@@ -2,7 +2,7 @@ import React from "react";
 import tw from "twin.macro";
 import Link from "next/link";
 
-const Locations = ["/"];
+const Locations = ["/", "/search"];
 
 const NavLinks = () => {
   return (

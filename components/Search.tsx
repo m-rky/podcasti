@@ -31,7 +31,7 @@ const Search = (): JSX.Element => {
 export default Search;
 
 const StyledSearchForm = styled.form`
-  ${tw`flex flex-col my-4`}
+  ${tw`flex flex-col my-4 w-full`}
 `;
 const SearchBar = styled.input`
   ${tw`py-2 px-2 mb-4 rounded focus:(outline-none ring ring-accent ring-inset)`}
