@@ -16,8 +16,8 @@ module.exports = {
         accent: "rgb(255 133 76)",
       },
       fontFamily: {
-        accent: "'DM Serif Text', serif",
-        body: "'Nunito', sans-serif",
+        accent: `Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol`,
+        body: `-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif`,
       },
     },
   },

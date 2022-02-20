@@ -1,5 +1,5 @@
 import React from "react";
-import tw, { styled } from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 
 type CardProps = {
   id: string;
@@ -30,7 +30,10 @@ const StyledCard = styled.a`
   ${tw`cursor-pointer bg-[#FDE0D3] w-40 flex flex-col flex-grow items-center transition duration-150 ease-in-out rounded-lg shadow hover:shadow-md active:(border-2 border-black opacity-95 shadow-inner transform scale-95)`}
 `;
 const CardInfo = tw.div`flex-1 flex items-center pl-1 text-xs text-center sm:(text-base py-2 px-2)`;
-const CardInfoHeader = tw.h2`font-bold pb-2`;
+const CardInfoHeader = styled.h2`
+  font-family: ${theme`fontFamily.body`};
+  ${tw`font-bold pb-2`}
+`;
 const CardImageBox = styled.div`
   & img {
     user-select: none;

@@ -1,6 +1,6 @@
 {
-  "name": "with-supabase-auth",
-  "version": "1.0.0",
+  "name": "podcasty",
+  "version": "1.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,13 +12,10 @@
     "@emotion/react": "^11.7.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.6.0",
-    "@supabase/supabase-js": "^1.30.0",
     "@tailwindcss/typography": "^0.5.1",
-    "cloudinary-build-url": "^0.2.4",
     "next": "^12.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-paginate": "^8.1.0",
     "swr": "1.2.1",
     "twin.macro": "^2.8.2"
   },

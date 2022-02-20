@@ -18,16 +18,6 @@ const Layout = ({ children }) => {
           content="Podcasty is the ultimate place to listen to your favorite podcasts for free, keep up with your favorite hosts, explore and discover new shows from every genre around from news to entertainment to comedy!"
         ></meta>
         <meta name="theme-color" content={theme`colors.bg`}></meta>
-        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        ></link>
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Nunito:wght@400;600&display=swap"
-          rel="stylesheet"
-        ></link>
       </Head>
       <StyledHeader>
         <Link href="/" passHref>
