@@ -1,6 +1,10 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { getTopTracks } from "../../lib/spotify";
 
-export default async function handler(_, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const response = await getTopTracks();
   const { shows } = await response.json();
 
@@ -15,6 +19,6 @@ export default async function handler(_, res) {
 
     return res.status(200).json({ tracks });
   } else {
-    return res.status(404);
+    return res.status(404).json({ message: "No shows..." });
   }
 }
