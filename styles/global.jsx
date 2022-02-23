@@ -2,6 +2,20 @@ import { Global, css } from "@emotion/react";
 import tw, { GlobalStyles as BaseStyles, theme } from "twin.macro";
 
 const customStyles = css`
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Cantata One";
+    src: url("/fonts/CantataOne/CantataOne-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
   body {
     ${tw`w-full antialiased`}
   }
