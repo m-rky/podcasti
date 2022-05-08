@@ -20,14 +20,15 @@ const Index = () => {
       <HomeTitle>Find your next pod!</HomeTitle>
       <Search />
       <Flex>
-        {listOfPods.map((podcast) => (
-          <SimpleCard
-            key={podcast.id}
-            id={podcast.id}
-            title={podcast.title}
-            image={podcast.image[0][1].url}
-          />
-        ))}
+        {listOfPods &&
+          listOfPods.map((podcast) => (
+            <SimpleCard
+              key={podcast.id}
+              id={podcast.id}
+              title={podcast.title}
+              image={podcast.image[0][1].url}
+            />
+          ))}
       </Flex>
     </HomePage>
   );
