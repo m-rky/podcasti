@@ -1,5 +1,7 @@
 # Podcasty
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/de456d33-d939-46a7-b14a-d91691d2fd61/deploy-status)](https://app.netlify.com/sites/awesome-brown-bf6411/deploys)
+
 [Podcasty](https://podcasty.app) is an app to listen to your favorite podcasts. Podcasty relies on Spotify API to retrive and play the relevant podcasting files. 
 
 ## History
