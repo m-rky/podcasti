@@ -2,20 +2,6 @@ import { Global, css } from "@emotion/react";
 import tw, { GlobalStyles as BaseStyles, theme } from "twin.macro";
 
 const customStyles = css`
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-Regular.ttf");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Cantata One";
-    src: url("/fonts/CantataOne/CantataOne-Regular.ttf");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-  }
   body {
     ${tw`w-full antialiased`}
   }
@@ -33,16 +19,11 @@ const customStyles = css`
   #__next {
     ${tw`overflow-x-hidden`}
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1,h2,h3,h4,h5,h6 {
     font-family: ${theme`fontFamily.accent`};
   }
   a {
-    ${tw`focus:(outline-none ring ring-accent ring-inset) hover:(text-highlight)`};
+    ${tw`outline-none focus:(ring ring-main) hover:(text-highlight)`};
   }
 `;
 

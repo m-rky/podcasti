@@ -30,16 +30,11 @@ const Search = (): JSX.Element => {
 
 export default Search;
 
-const StyledSearchForm = styled.form`
-  ${tw`flex flex-col my-4 w-full`}
-`;
+const StyledSearchForm = styled.form`${tw`flex flex-col my-4`}`;
 const SearchBar = styled.input`
-  ${tw`py-2 px-2 mb-4 rounded focus:(outline-none ring ring-accent ring-inset)`}
-  background-color: ${theme`colors.bgDarker`};
-  &::placeholder {
-    color: ${theme`colors.main`};
-  }
-`;
-const SearchButton = styled.button`
-  ${tw`text-white m-auto font-semibold w-max py-2 px-4 rounded focus:(outline-none ring ring-accent)`} background-color:${theme`colors.main`};
-`;
+${tw`py-2 px-2 mb-4 rounded outline-none focus:(ring ring-main)`}
+background-color: ${theme`colors.bgDarker`};
+&::placeholder {
+  color: ${theme`colors.main`}
+}`;
+const SearchButton = styled.button`${tw`text-white m-auto font-semibold w-max py-2 px-4 rounded`} background-color:${theme`colors.main`};`;
