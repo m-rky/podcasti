@@ -356,10 +356,9 @@ const StyledContainer = styled.section`
 const FormHeader = tw.h2`text-2xl font-bold`;
 const StyledForm = tw.form`flex flex-col my-4`;
 const AdditionalLinks = tw.div`flex flex-col`;
-const StyledInput = styled.input`
-  ${tw`bg-bgDarker py-2 px-2 mb-4 rounded outline-none focus:(ring ring-main)`}
+const StyledInput = styled.input`${tw`bg-bgDarker py-2 px-2 mb-4 rounded outline-none focus:(ring ring-main)`} 
   &::placeholder {
-    color: ${theme`colors.main`};
+    color: ${theme`colors.main`}
   }
 `;
 const StyledButton = tw.button`bg-main text-white m-auto font-semibold w-max py-2 px-4 rounded`;
