@@ -2,13 +2,7 @@ import React from "react";
 import tw, { styled, theme } from "twin.macro";
 import Link from "next/link";
 
-type CardProps = {
-  id: string;
-  title: string;
-  image: string;
-};
-
-const SimpleCard = ({ id, title, image }: CardProps): JSX.Element => {
+const SimpleCard = ({ id, title, image }) => {
   return (
     <Link
       href={{

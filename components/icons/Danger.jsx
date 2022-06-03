@@ -1,16 +1,13 @@
 import React from "react";
 import { styled } from "twin.macro";
 
-export const Danger = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement>
->((props, ref) => {
+export const Danger = (props, ref) => {
   return (
     <>
       <StyledDanger {...props} ref={ref} icon-role="danger" />
     </>
   );
-});
+};
 
 const StyledDanger = styled.i`
   & {

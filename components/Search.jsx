@@ -2,7 +2,7 @@ import { useState } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { useRouter } from "next/router";
 
-const Search = (): JSX.Element => {
+const Search = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
@@ -21,7 +21,7 @@ const Search = (): JSX.Element => {
         minLength={2}
         placeholder="Search"
         value={search}
-        onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
+        onInput={(e) => setSearch(e.target.value)}
       />
       <SearchButton type="submit">Search</SearchButton>
     </StyledSearchForm>
@@ -30,11 +30,16 @@ const Search = (): JSX.Element => {
 
 export default Search;
 
-const StyledSearchForm = styled.form`${tw`flex flex-col my-4`}`;
+const StyledSearchForm = styled.form`
+  ${tw`flex flex-col my-4`}
+`;
 const SearchBar = styled.input`
-${tw`py-2 px-2 mb-4 rounded outline-none focus:(ring ring-main)`}
-background-color: ${theme`colors.bgDarker`};
-&::placeholder {
-  color: ${theme`colors.main`}
-}`;
-const SearchButton = styled.button`${tw`text-white m-auto font-semibold w-max py-2 px-4 rounded`} background-color:${theme`colors.main`};`;
+  ${tw`py-2 px-2 mb-4 rounded outline-none focus:(ring ring-main)`}
+  background-color: ${theme`colors.bgDarker`};
+  &::placeholder {
+    color: ${theme`colors.main`};
+  }
+`;
+const SearchButton = styled.button`
+  ${tw`text-white m-auto font-semibold w-max py-2 px-4 rounded`} background-color:${theme`colors.main`};
+`;

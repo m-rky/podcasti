@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import tw, { styled } from "twin.macro";
 import Image from "next/image";
 import { buildUrl } from "cloudinary-build-url";
-import { PlayButton } from "@icons/PlayButton";
-import { Info } from "@icons/Info";
+import { PlayButton } from "./icons/PlayButton";
+import { Info } from "./icons/Info";
 
 const Card = ({ info, playing, details, index, children, author }) => {
   const {

@@ -1,8 +1,8 @@
-import Auth from "@core/Auth";
-import { supabase } from "@lib/initSupabase";
+import Auth from "../components/core/Auth";
+import { supabase } from "../lib/initSupabase";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { useUser } from "@lib/UserContext";
+import { useUser } from "../lib/UserContext";
 import tw, { styled } from "twin.macro";
 
 const auth = () => {

@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import tw, { styled } from "twin.macro";
-import { Close } from "@comp/icons/Close";
+import { Close } from "../icons/Close";
 
 export function Modal({ open, content, selector, onClick }) {
   const ref = useRef();

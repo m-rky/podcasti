@@ -1,7 +1,7 @@
 import React from "react";
-import NavLinks from "@core/NavLinks";
+import NavLinks from "../core/NavLinks";
 import tw, { styled, theme } from "twin.macro";
-import { supabase } from "@lib/initSupabase";
+import { supabase } from "../../lib/initSupabase";
 import { useRouter } from "next/router";
 import Link from "next/link";
 

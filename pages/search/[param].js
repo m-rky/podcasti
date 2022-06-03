@@ -1,7 +1,7 @@
-import { search } from "@lib/PodcastIndex";
-import Result from "@comp/Result";
-import Search from "@comp/Search";
-import Grid from "@comp/Grid";
+import { search } from "../../lib/PodcastIndex";
+import Result from "../../components/Result";
+import Search from "../../components/Search";
+import Grid from "../../components/Grid";
 import tw, { styled } from "twin.macro";
 
 const SearchPage = ({ feeds, count, query }) => {

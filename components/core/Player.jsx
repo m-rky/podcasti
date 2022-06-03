@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import tw, { styled, theme } from "twin.macro";
-import { PlayButton } from "@icons/PlayButton";
-import { PauseButton } from "@icons/PauseButton";
-import { ForwardButton } from "@icons/ForwardButton";
+import { PlayButton } from "../icons/PlayButton";
+import { PauseButton } from "../icons/PauseButton";
 import Image from "next/image";
 
 function Player({ playing, name, img, author }) {

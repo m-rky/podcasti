@@ -1,9 +1,9 @@
-import Search from "@comp/Search";
+import Search from "../components/Search";
 import tw, { styled } from "twin.macro";
-import { supabase } from "@lib/initSupabase";
-import Grid from "@comp/Grid";
-import Result from "@comp/Result";
-import { Modal } from "@core/Modal";
+import { supabase } from "../lib/initSupabase";
+import Grid from "../components/Grid";
+import Result from "../components/Result";
+import { Modal } from "../components/core/Modal";
 import { useState } from "react";
 
 const Discover = ({ data }) => {

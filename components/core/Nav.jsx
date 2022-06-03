@@ -1,9 +1,9 @@
-import tw, {styled, theme} from "twin.macro";
-import NavLinks from "@core/NavLinks";
-import Burger from "@core/Burger";
+import tw, { styled, theme } from "twin.macro";
+import NavLinks from "../core/NavLinks";
+import Burger from "../core/Burger";
 import { useState, useEffect } from "react";
-import { Menu } from "@comp/icons/Menu";
-import { Close } from "@comp/icons/Close";
+import { Menu } from "../icons/Menu";
+import { Close } from "../icons/Close";
 import { useRouter } from "next/router";
 
 const MobileMenu = ({ open, setOpen }) => {
@@ -57,4 +57,6 @@ const Nav = ({ person }) => {
 
 export default Nav;
 
-const MobileButton = styled.button`${tw`right-0 p-4 top-0 z-40 h-14 w-14 outline-none focus:(ring ring-main)`}`;
+const MobileButton = styled.button`
+  ${tw`right-0 p-4 top-0 z-40 h-14 w-14 outline-none focus:(ring ring-main)`}
+`;

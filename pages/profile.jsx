@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@lib/initSupabase";
-import Grid from "@comp/Grid";
-import Result from "@comp/Result";
+import { supabase } from "../lib/initSupabase";
+import Grid from "../components/Grid";
+import Result from "../components/Result";
 
 export default function Profile() {
   const [content, setContent] = useState(null);

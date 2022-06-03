@@ -1,7 +1,7 @@
-import { UserContextProvider } from "@lib/UserContext";
-import { supabase } from "@lib/initSupabase";
+import { UserContextProvider } from "../lib/UserContext";
+import { supabase } from "../lib/initSupabase";
 import GlobalStyles from "../styles/global";
-import Layout from "@core/Layout";
+import Layout from "../components/core/Layout";
 import { useState } from "react";
 
 export default function MyApp({ Component, pageProps }) {

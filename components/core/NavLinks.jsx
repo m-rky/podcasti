@@ -1,7 +1,7 @@
 import React from "react";
 import tw from "twin.macro";
 import Link from "next/link";
-import { supabase } from "@lib/initSupabase";
+import { supabase } from "../../lib/initSupabase";
 
 const Locations = ["/", "/discover"];
 const UserLocations = ["/", "/profile", "/discover"];

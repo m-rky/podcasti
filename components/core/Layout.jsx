@@ -1,5 +1,5 @@
-import Nav from "@core/Nav";
-import Player from "@core/Player";
+import Nav from "./Nav";
+import Player from "./Player";
 import tw, { styled, theme } from "twin.macro";
 import Link from "next/link";
 import Head from "next/head";

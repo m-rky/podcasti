@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from "react";
-import { supabase } from "@lib/initSupabase";
-import List from "@comp/List";
-import Card from "@comp/Card";
-import { getEpisodes, getTitle } from "@lib/PodcastIndex";
-import { Modal } from "@core/Modal";
+import { supabase } from "../../lib/initSupabase";
+import List from "../../components/List";
+import Card from "../../components/Card";
+import { getEpisodes, getTitle } from "../../lib/PodcastIndex";
+import { Modal } from "../../components/core/Modal";
 import ReactPaginate from "react-paginate";
 import tw, { styled } from "twin.macro";
 import { buildUrl } from "cloudinary-build-url";
@@ -22,7 +22,6 @@ const PodcastPage = (props) => {
   const user = supabase.auth.user();
 
   useEffect(() => {
-    // TODO: filter by user ID, right now it's just getting the first no matter what
     (async () => {
       setSubbed([]);
       if (user) {

@@ -1,4 +1,4 @@
-import Search from "@comp/Search";
+import Search from "../components/Search";
 import tw, { styled } from "twin.macro";
 
 const Index = () => {
