@@ -1,6 +1,6 @@
-import React from "react";
-import tw, { styled, theme } from "twin.macro";
-import Link from "next/link";
+import React from 'react';
+import tw, { styled, theme } from 'twin.macro';
+import Link from 'next/link';
 
 const SimpleCard = ({ id, title, image }) => {
   return (
@@ -13,11 +13,7 @@ const SimpleCard = ({ id, title, image }) => {
     >
       <StyledCard draggable={false}>
         <CardImageBox>
-          <CardImage
-            src={image}
-            alt={`Cover image for the show '${title}'`}
-            draggable={false}
-          ></CardImage>
+          <CardImage src={image} alt={`Cover image for the show '${title}'`} draggable={false}></CardImage>
         </CardImageBox>
         <CardInfo>
           <CardInfoHeader>{title}</CardInfoHeader>

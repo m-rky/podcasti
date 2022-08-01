@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import tw, { styled } from "twin.macro";
-import Image from "next/image";
-import { buildUrl } from "cloudinary-build-url";
-import { PlayButton } from "./icons/PlayButton";
-import { Info } from "./icons/Info";
+import React, { useState, useEffect } from 'react';
+import tw, { styled } from 'twin.macro';
+import { PlayButton } from './icons/PlayButton';
+import { Info } from './icons/Info';
 
 const Card = ({ info, playing, details, index, children, author }) => {
   const {
@@ -30,42 +28,22 @@ const Card = ({ info, playing, details, index, children, author }) => {
     title,
   } = info;
 
-  const cloudUrl = buildUrl(image || feedImage, {
-    cloud: {
-      cloudName: "daiihufwr",
-      storageType: "fetch",
-    },
-    transformations: {
-      resize: {
-        width: 300,
-      },
-    },
-  });
-
   // TODO: Fix page change = resetting the times because the calculations aren't set
   const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   };
   const convertedDate = datePublished * 1000;
   const timeDate = new Date(convertedDate).toISOString();
-  const formattedDate = new Date(convertedDate).toLocaleDateString(
-    undefined,
-    options
-  );
+  const formattedDate = new Date(convertedDate).toLocaleDateString(undefined, options);
   const hours = Math.floor(duration / 60 / 60);
   const minutes = Math.round(duration / 60) - hours * 60;
 
   return (
     <StyledCard>
       <CardImageBox>
-        <CardImage
-          src={cloudUrl}
-          alt={`Cover image for the show '${title}'`}
-          layout="fill"
-          quality={100}
-        ></CardImage>
+        <img src={image || feedImage} alt={`Cover image for the show '${title}'`} width={100} height={100}></img>
       </CardImageBox>
       <CardInfo>
         <CardInfoHeader>{title}</CardInfoHeader>
@@ -80,7 +58,7 @@ const Card = ({ info, playing, details, index, children, author }) => {
             playing({
               playing: enclosureUrl,
               name: title,
-              img: cloudUrl,
+              img: image || feedImage,
               author: author,
             })
           }
@@ -119,7 +97,6 @@ const CardImageBox = styled.div`
     display: none;
   }
 `;
-const CardImage = tw(Image)``;
 const CardActions = styled.div`
   button {
     ${tw`pl-2 my-2 ml-2`}

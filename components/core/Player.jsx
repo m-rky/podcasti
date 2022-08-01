@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import tw, { styled, theme } from "twin.macro";
-import { PlayButton } from "../icons/PlayButton";
-import { PauseButton } from "../icons/PauseButton";
-import Image from "next/image";
+import React, { useEffect, useState, useRef } from 'react';
+import tw, { styled, theme } from 'twin.macro';
+import { PlayButton } from '../icons/PlayButton';
+import { PauseButton } from '../icons/PauseButton';
 
 function Player({ playing, name, img, author }) {
+  console.log(img);
   const [stopped, setStopped] = useState(true);
   const [loaded, setLoaded] = useState(false);
   const [active, setActive] = useState(false);
@@ -37,12 +37,7 @@ function Player({ playing, name, img, author }) {
     <PlayerContainer>
       <PlayerBox>
         <PlayerImage>
-          <Image
-            src={img}
-            alt={`Cover image for the podcast`}
-            layout="fill"
-            objectFit="cover"
-          ></Image>
+          <img src={img} alt={`Cover image for the podcast`} width={100} height={100}></img>
         </PlayerImage>
         <PlayerBar>
           <PlayerInfo>
@@ -58,20 +53,11 @@ function Player({ playing, name, img, author }) {
 
           <PlayerButtons>
             {/* <ForwardButton flipped={true} /> */}
-            {!active ? (
-              <PlayButton onClick={handlePlay} />
-            ) : (
-              <PauseButton onClick={handlePause} />
-            )}
+            {!active ? <PlayButton onClick={handlePlay} /> : <PauseButton onClick={handlePause} />}
             {/* <ForwardButton flipped={false} /> */}
           </PlayerButtons>
         </PlayerBar>
-        <audio
-          ref={audioRef}
-          src={playing}
-          onCanPlayThrough={handleLoad}
-          onLoadStart={handleLoadStart}
-        />
+        <audio ref={audioRef} src={playing} onCanPlayThrough={handleLoad} onLoadStart={handleLoadStart} />
       </PlayerBox>
     </PlayerContainer>
   );
@@ -105,13 +91,7 @@ const PlayerMarquee = styled.div`
   width: -webkit-fill-available;
   overflow: visible;
   text-overflow: ellipsis;
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    #fff 0%,
-    #fff 80%,
-    transparent
-  );
+  mask-image: linear-gradient(to right, transparent, #fff 0%, #fff 80%, transparent);
   @keyframes marquee {
     0% {
       transform: translateX(0);

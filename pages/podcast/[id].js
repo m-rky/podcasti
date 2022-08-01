@@ -1,14 +1,11 @@
-import { useRef, useState, useEffect } from "react";
-import { supabase } from "../../lib/initSupabase";
-import List from "../../components/List";
-import Card from "../../components/Card";
-import { getEpisodes, getTitle } from "../../lib/PodcastIndex";
-import { Modal } from "../../components/core/Modal";
-import ReactPaginate from "react-paginate";
-import tw, { styled } from "twin.macro";
-import { buildUrl } from "cloudinary-build-url";
-import Image from "next/image";
-import Link from "next/link";
+import { useRef, useState, useEffect } from 'react';
+import List from '../../components/List';
+import Card from '../../components/Card';
+import { getEpisodes, getTitle } from '../../lib/PodcastIndex';
+import { Modal } from '../../components/core/Modal';
+import ReactPaginate from 'react-paginate';
+import tw, { styled } from 'twin.macro';
+import Link from 'next/link';
 
 const PodcastPage = (props) => {
   const [content, setContent] = useState(props.items || null);
@@ -19,126 +16,21 @@ const PodcastPage = (props) => {
   const [activeContent, setActiveContent] = useState(content.slice(0, size));
   const ref = useRef();
 
-  const user = supabase.auth.user();
-
   useEffect(() => {
-    (async () => {
-      setSubbed([]);
-      if (user) {
-        const { data, error } = await supabase
-          .from("subs")
-          .select("showlist")
-          .match({ user: user.id });
-        if (data.length >= 1) {
-          const { showlist } = data[0];
-          setSubbed(showlist.map((item) => item.id));
-        }
-      }
-    })();
-
     setActiveContent(content.slice(0, size));
 
-    ref.current = document.querySelector("html");
-    ref.current.addEventListener("keydown", keyPressed);
-  }, []);
+    ref.current = document.querySelector('html');
+    ref.current.addEventListener('keydown', keyPressed);
+  }, [content, size]);
 
   useEffect(() => {
     // TODO: Added is being set to true no matter what even when signed out...
     setAdded(subbed.includes(content[0].feedId));
-  }, [subbed]);
+  }, [content, subbed]);
 
   const keyPressed = (e) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       setModal({ open: false, id: null });
-    }
-  };
-
-  const cloudUrl = buildUrl(content[0].feedImage || content[0].image, {
-    cloud: {
-      cloudName: "daiihufwr",
-      storageType: "fetch",
-    },
-    transformations: {
-      resize: {
-        width: 300,
-      },
-    },
-  });
-
-  const handleSub = async () => {
-    const { id } = await supabase.auth.user();
-    const { data: orig, error: problem } = await supabase
-      .from("subs")
-      .select("showlist")
-      .match({ user: user.id });
-
-    if (orig.length >= 1) {
-      const { showlist } = orig[0];
-      const found = showlist.find((item) => item.id === content[0].feedId);
-      if (showlist.length >= 1 && showlist !== null && found === undefined) {
-        // if there are already saved subs
-        const addedPod = {
-          id: content[0].feedId,
-          name: props.title,
-          author: props.author,
-          image: content[0].image || content[0].feedImage,
-          genres: props.categories,
-        };
-        const newArr = orig[0].showlist.map((item) => item);
-        newArr.push(addedPod);
-        const { data, error } = await supabase.from("subs").upsert({
-          id: id,
-          user: id,
-          genres: Object.values(props.categories),
-          showlist: newArr,
-        });
-        setAdded(true);
-      } else if (showlist === null) {
-        // if there are no saved subs
-        const { data, error } = await supabase.from("subs").upsert({
-          id: id,
-          user: id,
-          genres: Object.values(props.categories),
-          showlist: [
-            {
-              id: content[0].feedId,
-              name: props.title,
-              author: props.author,
-              image: content[0].image || content[0].feedImage,
-              genres: props.categories,
-            },
-          ],
-        });
-        setAdded(true);
-      } else {
-        // removing the sub
-        const filteredArray = showlist.filter((item) => item !== found);
-        const { data, error } = await supabase.from("subs").upsert({
-          id: id,
-          user: id,
-          genres: Object.values(props.categories),
-          showlist: filteredArray,
-        });
-        setAdded(false);
-      }
-    }
-
-    if (orig.length < 1 || orig[0].showlist.length < 1) {
-      const { data, error } = await supabase.from("subs").upsert({
-        id: id,
-        user: id,
-        genres: Object.values(props.categories),
-        showlist: [
-          {
-            id: content[0].feedId,
-            name: props.title,
-            author: props.author,
-            image: content[0].image || content[0].feedImage,
-            genres: props.categories,
-          },
-        ],
-      });
-      setAdded(true);
     }
   };
 
@@ -150,63 +42,39 @@ const PodcastPage = (props) => {
     setActiveContent(content.slice(offset, offset + size));
   };
 
+  console.log(props);
+
   return (
     <StyledPodPage>
       <Info>
         <StyledHeader>{props.title}</StyledHeader>
         <StyledImageWrapper>
-          <Image
-            src={cloudUrl}
+          <img
+            src={props.items[0].feedImage}
             alt={`Cover image for the podcast '${props.title}'`}
-            layout="fill"
-            quality={100}
+            width={100}
+            height={100}
           />
         </StyledImageWrapper>
 
         <InfoText>
-          {props.title !== props.author && (
-            <AuthorText>{props.author}</AuthorText>
-          )}
+          {props.title !== props.author && <AuthorText>{props.author}</AuthorText>}
           <Genres>
             {Object.keys(props.categories).length > 1 &&
               Object.keys(props.categories)
                 .slice(0, 3)
-                .map((category, index) => (
-                  <GenreItem key={index}>
-                    {props.categories[category]}
-                  </GenreItem>
-                ))}
-            {Object.keys(props.categories).length <= 1 && (
-              <GenreItem>{Object.values(props.categories)}</GenreItem>
-            )}
+                .map((category, index) => <GenreItem key={index}>{props.categories[category]}</GenreItem>)}
+            {Object.keys(props.categories).length <= 1 && <GenreItem>{Object.values(props.categories)}</GenreItem>}
           </Genres>
-          {user === null && (
-            <Link href="/auth" passHref>
-              <StyledSignIn>Sign In</StyledSignIn>
-            </Link>
-          )}
-          <StyledSubButton
-            onClick={() => handleSub()}
-            added={added}
-            disabled={user === null}
-          >
-            {added ? "Unsubscribe" : "Subscribe"}
-          </StyledSubButton>
         </InfoText>
       </Info>
 
       {content && (
         <List>
           {activeContent.map((item, index) => (
-            <Card
-              key={item.id}
-              info={item}
-              playing={props.playing}
-              details={setModal}
-              index={index}
-            >
+            <Card key={item.id} info={item} playing={props.playing} details={setModal} index={index}>
               <Modal
-                key={"modal-" + index}
+                key={'modal-' + index}
                 open={modal.id === index}
                 content={item.description}
                 selector="#portal"
@@ -218,18 +86,18 @@ const PodcastPage = (props) => {
       )}
       <StyledPaginate>
         <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
           pageCount={content.length / size}
           marginPagesDisplayed={0}
           pageRangeDisplayed={3}
           onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          previousClassName={"prev"}
-          disabledClassName={"disabled"}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+          previousClassName={'prev'}
+          disabledClassName={'disabled'}
         />
       </StyledPaginate>
     </StyledPodPage>
@@ -252,7 +120,7 @@ export async function getServerSideProps(context) {
     return { props: { items, count, title, categories, author } };
   }
   return {
-    redirect: { permanent: false, destination: "/404" },
+    redirect: { permanent: false, destination: '/404' },
     props: {},
   };
 }
@@ -299,7 +167,7 @@ const StyledPaginate = styled.div`
   .active {
     ${tw`text-white bg-main`}
   }
-  .disabled > [role="button"] {
+  .disabled > [role='button'] {
     opacity: 0.7;
     cursor: not-allowed;
   }
