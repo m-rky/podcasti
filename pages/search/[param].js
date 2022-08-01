@@ -1,8 +1,8 @@
-import { search } from "../../lib/PodcastIndex";
-import Result from "../../components/Result";
-import Search from "../../components/Search";
-import Grid from "../../components/Grid";
-import tw, { styled } from "twin.macro";
+import { search } from '../../lib/PodcastIndex';
+import Result from '../../components/Result';
+import Search from '../../components/Search';
+import Grid from '../../components/Grid';
+import tw, { styled } from 'twin.macro';
 
 const SearchPage = ({ feeds, count, query }) => {
   if (feeds && feeds.length > 1) {
@@ -44,7 +44,7 @@ const SearchPage = ({ feeds, count, query }) => {
   if (count === 0) {
     return (
       <StyledSearchPage>
-        <StyledHeader>No results found for '{query}'</StyledHeader>
+        <StyledHeader>No results found for `&apos;`{query}`&apos;`</StyledHeader>
       </StyledSearchPage>
     );
   }
