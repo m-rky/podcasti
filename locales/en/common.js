@@ -1,5 +1,5 @@
 const common = {
-  title: "Podcasty",
+  title: 'Podcasti',
 };
 
 export default common;
